@@ -26,6 +26,12 @@ pipeline {
                     echo 'Hello...'
                 }
             }
+
+            stage('Clone Repository') {
+                steps {
+                    git 'https://github.com/jasonMatillano/HelloJava.git'
+                }
+            }
             
             stage('Cleanup') {
                 steps {
