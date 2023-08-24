@@ -13,6 +13,7 @@ pipeline {
             steps {
                 // Perform testing steps here
                 sh 'echo "Testing..."'
+                input message: 'Deploy?', ok: 'Deploy'
             }
         }
         
