@@ -38,17 +38,17 @@ pipeline {
         post {
             always {
                 // Perform actions that should always run
-                sh 'echo "Always running..."'
+                echo "Always running..."
             }
             
             success {
                 // Perform actions that should only run on success
-                sh 'echo "Success!"'
+                echo "Success!"
             }
             
             failure {
                 // Perform actions that should only run on failure
-                sh 'echo "Failure!"'
+                echo "Failure!"
             }
         }
     }
