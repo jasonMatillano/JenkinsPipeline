@@ -1,51 +1,50 @@
 pipeline {
     agent any
-    
-    stages {
-        stage('Build') {
-            steps {
-                // Perform build steps here
-                sh 'echo "Building..."'
+        stages {
+            stage('Build') {
+                steps {
+                    // Perform build steps here
+                    sh 'echo "Building..."'
+                }
+            }
+            
+            stage('Test') {
+                steps {
+                    // Perform testing steps here
+                    sh 'echo "Testing..."'
+                    input message: 'Deploy?', ok: 'Deploy'
+                }
+            }
+            
+            stage('Deploy') {
+                steps {
+                    // Perform deployment steps here
+                    sh 'echo "Deploying..."'
+                }
+            }
+            
+            stage('Cleanup') {
+                steps {
+                    // Perform cleanup steps here
+                    sh 'echo "Cleaning up..."'
+                }
             }
         }
         
-        stage('Test') {
-            steps {
-                // Perform testing steps here
-                sh 'echo "Testing..."'
-                input message: 'Deploy?', ok: 'Deploy'
+        post {
+            always {
+                // Perform actions that should always run
+                sh 'echo "Always running..."'
             }
-        }
-        
-        stage('Deploy') {
-            steps {
-                // Perform deployment steps here
-                sh 'echo "Deploying..."'
+            
+            success {
+                // Perform actions that should only run on success
+                sh 'echo "Success!"'
             }
-        }
-        
-        stage('Cleanup') {
-            steps {
-                // Perform cleanup steps here
-                sh 'echo "Cleaning up..."'
+            
+            failure {
+                // Perform actions that should only run on failure
+                sh 'echo "Failure!"'
             }
         }
     }
-    
-    post {
-        always {
-            // Perform actions that should always run
-            sh 'echo "Always running..."'
-        }
-        
-        success {
-            // Perform actions that should only run on success
-            sh 'echo "Success!"'
-        }
-        
-        failure {
-            // Perform actions that should only run on failure
-            sh 'echo "Failure!"'
-        }
-    }
-}
